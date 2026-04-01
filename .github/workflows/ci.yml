@@ -14,3 +14,9 @@ jobs:
 
       - name: Run a simple command
         run: echo "This is my pipeline run"
+
+      - name: Step 1
+        run: echo "First Step"
+
+      - name: Step 2
+        run: echo "Second Step"
