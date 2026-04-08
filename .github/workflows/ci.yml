@@ -19,6 +19,9 @@ jobs:
 
       - name: Step 1
         run: echo "First Step"
+      
+      - name: Build Docker Image
+        run: docker build -t devops_demo .
 
 
          
