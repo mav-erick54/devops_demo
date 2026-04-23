@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write   # REQUIRED for GHCR
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -19,9 +23,17 @@ jobs:
 
       - name: Step 1
         run: echo "First Step"
-      
-      - name: Build Docker Image
-        run: docker build -t devops_demo .
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build Image
+        run: docker build -t ghcr.io/${{ github.actor }}/devops-demo:v1 .
+
+      - name: Push Image
+        run: docker push ghcr.io/${{ github.actor }}/devops-demo:v1
+
+
 
 
          
